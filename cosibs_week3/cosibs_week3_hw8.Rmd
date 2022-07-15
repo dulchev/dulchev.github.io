@@ -1,0 +1,118 @@
+---
+title: "BIOS 6670-001 — HW #8"
+author: 
+  - Daniel Dulchevsky
+  - Dr. Zhiying You
+date: "CoSIBS Week 3"
+output: 
+  html_document:
+    theme: readable
+    code_folding: hide
+    #toc: true
+    #toc_float: true
+---
+```{r include=FALSE}
+knitr::opts_chunk$set(comment = NA)
+options(scipen=999)
+```
+<br/>
+
+##### Select three pairs of sample means of t-tests with and without rejection of the null, respectively, from Homework #3.
+
+```{r}
+sample_size_a = 10;
+sample_size_b = 10;
+
+reject_null_2a = 0;
+reject_null_2b = 0;
+reject_null_3a = 0;
+reject_null_3b = 0;
+
+dont_reject_null_2a = 0;
+dont_reject_null_2b = 0;
+dont_reject_null_3a = 0;
+dont_reject_null_3b = 0;
+
+set.seed(1);
+
+for (i in 1:10000)
+{
+  sample_a = rnorm(n=sample_size_a, mean=10, sd=5);
+  sample_b = rnorm(n=sample_size_b, mean=15, sd=5);
+  
+  t = (mean(sample_a)-mean(sample_b))/
+      sqrt(((sd(sample_a))^2)/sample_size_a + ((sd(sample_b))^2)/sample_size_b);
+
+  deg_free = (sample_size_a*2)-2;
+  
+  p = pt(t, df=deg_free);
+  
+  if (2*p<=0.05)
+  {
+    reject_null_1a = reject_null_2a;
+    reject_null_1b = reject_null_2b;
+    
+    reject_null_2a = reject_null_3a;
+    reject_null_2b = reject_null_3b;
+    
+    reject_null_3a = sample_a;
+    reject_null_3b = sample_b;
+    
+  }
+  
+  else
+  {
+    dont_reject_null_1a = dont_reject_null_2a;
+    dont_reject_null_1b = dont_reject_null_2b;
+    
+    dont_reject_null_2a = dont_reject_null_3a;
+    dont_reject_null_2b = dont_reject_null_3b;
+    
+    dont_reject_null_3a = sample_a;
+    dont_reject_null_3b = sample_b;
+  }
+  
+}
+
+cat("Pairs of Samples that DO reject the null: ", "\n\n\t", 
+    
+    "Pair 1: ", toString(round(reject_null_1a, digits = 3)), "\n\t\t\t", 
+                toString(round(reject_null_1b, digits = 3)), "\n\n\t",
+    
+    "Pair 2: ", toString(round(reject_null_2a, digits = 3)), "\n\t\t\t", 
+                toString(round(reject_null_2b, digits = 3)), "\n\n\t",
+    
+    "Pair 3: ", toString(round(reject_null_3a, digits = 3)), "\n\t\t\t", 
+                toString(round(reject_null_3b, digits = 3)), "\n\n\n", 
+                sep = "");
+
+cat("Pairs of Samples that DO NOT reject the null: ", "\n\n\t", 
+    
+    "Pair 1: ", toString(round(dont_reject_null_1a, digits = 3)), "\n\t\t\t", 
+                toString(round(dont_reject_null_1b, digits = 3)), "\n\n\t",
+    
+    "Pair 2: ", toString(round(dont_reject_null_2a, digits = 3)), "\n\t\t\t", 
+                toString(round(dont_reject_null_2b, digits = 3)), "\n\n\t",
+    
+    "Pair 3: ", toString(round(dont_reject_null_3a, digits = 3)), "\n\t\t\t", 
+                toString(round(dont_reject_null_3b, digits = 3)), "\n", 
+                sep = "");
+```
+<br/>
+
+##### Calculate the 95% confidence interval for the difference of the two population means.
+```{r class.source = 'fold-show'}
+t.test(sample_a, sample_b, var=T);
+```
+According to the output of the above `t.test()` function, our 95% confidence interval for the difference of the two population means is approximately (-12.8, -3.3).
+
+<br/>
+
+##### Discuss the relationship between test and confidence interval.
+The t-test and confidence interval are related in that a t-test would reject the null hypothesis if and only if the confidence interval does not contain 0. Likewise, a t-test fails to reject the null hypothesis if and only if the confidence interval does contain 0.
+
+<br/>
+$~$
+<br/>
+
+*End of Document*

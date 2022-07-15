@@ -1,0 +1,32 @@
+---
+title: "BIOS 6670-001 — HW #7"
+author: 
+  - Daniel Dulchevsky
+  - Dr. Zhiying You
+date: "CoSIBS Week 3"
+output: 
+  html_document:
+    theme: readable
+    code_folding: hide
+    #toc: true
+    #toc_float: true
+---
+```{r include=FALSE}
+knitr::opts_chunk$set(comment = NA)
+options(scipen=999)
+```
+<br/>
+
+##### Discuss the results from Homeworks 3 through 6.
+
+In summary, homeworks 3 and 4 had a sample population of 10, while homeworks 5 and 6 had a sample population of 30. Furthermore, homeworks 3 and 5 had a two-sided significance level of 0.05, while homeworks 4 and 6 had a two-sided significance level of 0.01. 
+
+<br/>
+
+The proportion of conclusions that DID NOT reject null hypothesis was highest in Homework 4 (0.7058, n = 10, $\alpha$=0.01), followed by Homework 3 (0.4368, n = 10, $\alpha$=0.05), followed by Homework 6 (0.1151, n = 30, $\alpha$=0.01), and least in Homework 5 (0.033, n = 30, $\alpha$=0.05). These results are expected and correspond with their respective sample size and significance level.
+
+<br/>
+$~$
+<br/>
+
+*End of Document*
